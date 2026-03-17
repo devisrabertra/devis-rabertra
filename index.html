@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis Rabertra - Database Administrator</title>
+    <!-- Font Awesome 5 (icons) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1e293b;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            top: -250px;
+            right: -100px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            animation-delay: 0s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            bottom: -200px;
+            left: -100px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.03));
+            animation-delay: -5s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            top: 30%;
+            left: 10%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            animation-delay: -2s;
+        }
+
+        .bg-circle:nth-child(4) {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            right: 15%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+            animation-delay: -8s;
+        }
+
+        .bg-circle:nth-child(5) {
+            width: 150px;
+            height: 150px;
+            top: 15%;
+            right: 25%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+            animation-delay: -3s;
+        }
+
+        .bg-circle:nth-child(6) {
+            width: 600px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px) scale(1.05);
+            }
+            50% {
+                transform: translateY(20px) translateX(-20px) scale(0.95);
+            }
+            75% {
+                transform: translateY(-20px) translateX(30px) scale(1.02);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        /* Grid overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glassmorphism effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* header / navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: white;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            background: #ffd700;
+        }
+
+        /* buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            box-shadow: inset 0 0 0 2px white;
+            margin-left: 12px;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* WhatsApp button */
+        .btn-wa {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px 32px;
+            font-size: 1.2rem;
+        }
+
+        .btn-wa:hover {
+            background: linear-gradient(135deg, #128C7E, #075E54);
+            box-shadow: 0 12px 28px rgba(18, 140, 126, 0.4);
+        }
+
+        /* hero section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 40px 0 60px;
+            flex-wrap: wrap;
+            color: white;
+        }
+
+        .hero-content {
+            flex: 1 1 400px;
+        }
+
+        .hero-content .badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(255,255,255,0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255,255,255,0.5);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: bounce 3s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 500px;
+            margin-bottom: 32px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .hero-image {
+            flex: 1 1 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: pulseGlow 3s infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            padding: 12px;
+            object-fit: cover;
+            box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.02) rotate(2deg);
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .contact-info-item:hover {
+            transform: translateY(-2px) scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .contact-info-item i {
+            color: #ffd700;
+        }
+
+        .contact-info-item .fa-whatsapp {
+            color: #25D366;
+        }
+
+        /* section titles */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .section-sub {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto 48px;
+            font-size: 1.1rem;
+        }
+
+        /* skill cards */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 24px 16px;
+            text-align: center;
+            border-radius: 28px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            transform: rotate(45deg);
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #ffd700;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-card i {
+            font-size: 40px;
+            color: #ffd700;
+            margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .skill-card h3 {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        /* about section */
+        .about-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 50px;
+            margin: 60px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-flex {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .about-left {
+            flex: 1 1 300px;
+        }
+
+        .about-right {
+            flex: 2 1 400px;
+            color: white;
+        }
+
+        .about-left img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .about-left img:hover {
+            transform: scale(1.02);
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .info-list i {
+            color: #ffd700;
+            width: 20px;
+        }
+
+        .info-list .fa-whatsapp {
+            color: #25D366;
+        }
+
+        .info-list a {
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .info-list a:hover {
+            color: #ffd700;
+        }
+
+        .education-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .education-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .education-item h3 {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .education-item .meta {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .education-item p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* skills & competencies detail */
+        .skills-competencies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .skill-group {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .skill-group:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+        }
+
+        .skill-group h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: #ffd700;
+            color: #1e293b;
+            transform: scale(1.05);
+            border-color: #ffd700;
+        }
+
+        /* portfolio grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .portfolio-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ffd700;
+            box-shadow: 0 30px 40px -15px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-img::after {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.3rem;
+            margin: 18px 20px 8px;
+            color: #ffd700;
+        }
+
+        .portfolio-item p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 20px 20px;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 8px;
+            margin: 0 20px 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* contact section */
+        .contact-wa {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            color: white;
+        }
+
+        .wa-icon-large {
+            font-size: 80px;
+            color: #25D366;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            filter: drop-shadow(0 0 20px rgba(37, 211, 102, 0.5));
+        }
+
+        .wa-description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .wa-number {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .wa-number i {
+            color: #25D366;
+            margin-right: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-caption {
+            margin: 20px auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            border-color: #ffd700;
+        }
+
+        .modal-prev, .modal-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-prev:hover, .modal-next:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+            border-color: #ffd700;
+        }
+
+        .modal-prev { left: 20px; }
+        .modal-next { right: 20px; }
+
+        /* footer */
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        footer a {
+            color: #25D366;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ffd700;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 12px;
+            }
+            .hero .btn {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .about-section {
+                padding: 30px;
+            }
+            .contact-info {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+    
+    <div class="grid-overlay"></div>
+    
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="logo">Devis Rabertra</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#portfolio">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">Database Administrator</span>
+                <h1>Hello, I'm <span>Devis Rabertra</span></h1>
+                <p>Experienced professional in managing and optimizing SQL Server databases. Proficient in SQL, T-SQL, and advanced SQL Server features.</p>
+                
+                <div class="contact-info">
+                    <a href="https://wa.me/6281283885569" target="_blank" class="contact-info-item">
+                        <i class="fab fa-whatsapp"></i> +62 812-8388-5569
+                    </a>
+                    <span class="contact-info-item"><i class="fas fa-envelope"></i> Devisrabertra10@gmail.com</span>
+                    <span class="contact-info-item"><i class="fas fa-map-marker-alt"></i> Bekasi, West Java</span>
+                    <a href="https://linkedin.com/in/devis-rabertra-64747b269" target="_blank" class="contact-info-item">
+                        <i class="fab fa-linkedin"></i> /in/devis-rabertra
+                    </a>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <a href="#contact" class="btn">Contact Me via WA</a>
+                    <a href="#about" class="btn btn-outline">About Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/profile.jpg" alt="Devis Rabertra" onerror="this.src='https://via.placeholder.com/400x400/667eea/ffffff?text=DR'">
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about-section">
+            <div class="about-flex">
+                <div class="about-left">
+                    <img src="images/profile.jpg" alt="Devis Rabertra" onerror="this.src='https://via.placeholder.com/300x400/667eea/ffffff?text=DR'">
+                    
+                    <ul class="info-list">
+                        <li><i class="fas fa-user"></i> Devis Rabertra</li>
+                        <li><i class="fas fa-calendar"></i> Age: 31</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bekasi, West Java</li>
+                        <li><a href="https://wa.me/6281283885569" target="_blank" style="display: flex; align-items: center; gap: 10px;"><i class="fab fa-whatsapp"></i> +62 812-8388-5569</a></li>
+                        <li><i class="fas fa-envelope"></i> Devisrabertra10@gmail.com</li>
+                        <li><a href="https://linkedin.com/in/devis-rabertra-64747b269" target="_blank" style="display: flex; align-items: center; gap: 10px;"><i class="fab fa-linkedin"></i> linkedin.com/in/devis-rabertra</a></li>
+                    </ul>
+                </div>
+                
+                <div class="about-right">
+                    <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffd700;">About Me</h2>
+                    <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 20px;">
+                        Experienced professional in managing and optimizing SQL Server databases. Proficient in SQL, T-SQL, and advanced SQL Server features such as stored procedures, functions, triggers, and indexing. Possesses a deep understanding of SQL Server architecture, backup and restore processes, and performance tuning. Actively involved in the design, implementation, and maintenance of databases to support business operations.
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 30px;">
+                        Currently pursuing an S2 degree in Information Systems, further enhancing my expertise in database management and technology. Open to new opportunities in managing complex and large-scale database environments.
+                    </p>
+
+                    <h3 style="color: #ffd700; margin-bottom: 15px;">Education</h3>
+                    
+                    <div class="education-item">
+                        <h3>Master's in Information Systems</h3>
+                        <div class="meta">Nusa Mandiri University (Jakarta, 2024 - Present)</div>
+                        <p>Currently in the 4th Semester</p>
+                    </div>
+                    
+                    <div class="education-item">
+                        <h3>Bachelor's in Information Systems</h3>
+                        <div class="meta">Nusa Mandiri University (Jakarta, 2021-2022)</div>
+                        <p>GPA 3.34/4.00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILL CARDS (MAIN) -->
+        <section id="skills" style="scroll-margin-top: 30px;">
+            <h2 class="section-title">Core Skills</h2>
+            <p class="section-sub">Database technologies and tools I master to manage and optimize database systems.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fas fa-database"></i><h3>SQL Server</h3></div>
+                <div class="skill-card"><i class="fas fa-code"></i><h3>T-SQL</h3></div>
+                <div class="skill-card"><i class="fas fa-chart-bar"></i><h3>SSAS</h3></div>
+                <div class="skill-card"><i class="fas fa-exchange-alt"></i><h3>SSIS</h3></div>
+                <div class="skill-card"><i class="fas fa-file-alt"></i><h3>SSRS</h3></div>
+                <div class="skill-card"><i class="fas fa-warehouse"></i><h3>Data Warehouse</h3></div>
+                <div class="skill-card"><i class="fas fa-tachometer-alt"></i><h3>Performance Tuning</h3></div>
+                <div class="skill-card"><i class="fas fa-shield-alt"></i><h3>Database Security</h3></div>
+                <div class="skill-card"><i class="fas fa-copy"></i><h3>Backup & Recovery</h3></div>
+                <div class="skill-card"><i class="fas fa-project-diagram"></i><h3>Stored Procedures</h3></div>
+                <div class="skill-card"><i class="fas fa-bolt"></i><h3>Query Optimization</h3></div>
+                <div class="skill-card"><i class="fas fa-sitemap"></i><h3>Database Design</h3></div>
+            </div>
+        </section>
+
+        <!-- SKILLS & COMPETENCIES DETAIL -->
+        <section style="margin-top: 40px;">
+            <h2 class="section-title">Skills & Competencies Detail</h2>
+            <p class="section-sub">Technical expertise and soft skills in detail</p>
+            
+            <div class="skills-competencies">
+                <div class="skill-group">
+                    <h3>Database Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">SSAS</span>
+                        <span class="skill-tag">SSIS</span>
+                        <span class="skill-tag">SSRS</span>
+                        <span class="skill-tag">Data Warehouse</span>
+                        <span class="skill-tag">ETL</span>
+                        <span class="skill-tag">SQL Server Agent</span>
+                        <span class="skill-tag">T-SQL</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>Database Expertise</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">Performance Tuning</span>
+                        <span class="skill-tag">Query Optimization</span>
+                        <span class="skill-tag">Indexing</span>
+                        <span class="skill-tag">Stored Procedures</span>
+                        <span class="skill-tag">Functions</span>
+                        <span class="skill-tag">Triggers</span>
+                        <span class="skill-tag">Backup & Recovery</span>
+                        <span class="skill-tag">Data Analysis</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Teamwork</span>
+                        <span class="skill-tag">Flexibility</span>
+                        <span class="skill-tag">Problem-solving</span>
+                        <span class="skill-tag">Continuous Improvement</span>
+                        <span class="skill-tag">Quality Control</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO / PROJECT -->
+        <section id="portfolio" style="scroll-margin-top: 30px; margin-top: 60px;">
+            <h2 class="section-title">Database Projects</h2>
+            <p class="section-sub">Database projects I have worked on</p>
+            
+            <div class="portfolio-grid" id="portfolio-grid">
+                <div class="portfolio-item" onclick="openModal(0)">
+                    <div class="portfolio-img" style="background-image: url('images/project1.jpg');" onerror="this.style.background='linear-gradient(145deg, #667eea, #764ba2)'"></div>
+                    <h3>Database Monitoring Dashboard</h3>
+                    <p>Real-time monitoring and performance tracking to ensure database stability and availability</p>
+                    <div class="portfolio-tags"><span class="tag">SQL Server</span><span class="tag">T-SQL</span><span class="tag">Performance</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(1)">
+                    <div class="portfolio-img" style="background-image: url('images/project2.jpg');" onerror="this.style.background='linear-gradient(145deg, #764ba2, #667eea)'"></div>
+                    <h3>Automated Database Restore System</h3>
+                    <p>Streamlining SQL Server database recovery with scheduled and dynamic restore processes</p>
+                    <div class="portfolio-tags"><span class="tag">SSIS</span><span class="tag">Data Warehouse</span><span class="tag">ETL</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(2)">
+                    <div class="portfolio-img" style="background-image: url('images/project3.jpg');" onerror="this.style.background='linear-gradient(145deg, #667eea, #9f7aea)'"></div>
+                    <h3>Backup & Recovery</h3>
+                    <p>Backup and recovery strategy implementation for disaster recovery plan</p>
+                    <div class="portfolio-tags"><span class="tag">Backup</span><span class="tag">Recovery</span><span class="tag">DRP</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(3)">
+                    <div class="portfolio-img" style="background-image: url('images/project4.jpg');" onerror="this.style.background='linear-gradient(145deg, #9f7aea, #667eea)'"></div>
+                    <h3>SQL Server Reporting</h3>
+                    <p>Business report creation using SQL Server Reporting Services (SSRS)</p>
+                    <div class="portfolio-tags"><span class="tag">SSRS</span><span class="tag">Reporting</span><span class="tag">Analysis</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(4)">
+                    <div class="portfolio-img" style="background-image: url('images/project5.jpg');" onerror="this.style.background='linear-gradient(145deg, #667eea, #5a67d8)'"></div>
+                    <h3>EOD Optimization</h3>
+                    <p>End of Day process optimization to improve processing efficiency</p>
+                    <div class="portfolio-tags"><span class="tag">EOD</span><span class="tag">Optimization</span><span class="tag">Tuning</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(5)">
+                    <div class="portfolio-img" style="background-image: url('images/project6.jpg');" onerror="this.style.background='linear-gradient(145deg, #5a67d8, #667eea)'"></div>
+                    <h3>Database Security</h3>
+                    <p>Database security implementation and user access management</p>
+                    <div class="portfolio-tags"><span class="tag">Security</span><span class="tag">Permissions</span><span class="tag">Audit</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT VIA WHATSAPP -->
+        <section id="contact" style="scroll-margin-top: 40px; margin-top: 60px;">
+            <h2 class="section-title">Contact Me via WhatsApp</h2>
+            <p class="section-sub">Interested in collaborating? Click the button below to chat with me directly</p>
+            
+            <div class="contact-wa">
+                <i class="fab fa-whatsapp wa-icon-large"></i>
+                <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: #ffd700;">Chat via WhatsApp</h3>
+                
+                <div class="wa-number">
+                    <i class="fab fa-whatsapp"></i> +62 812-8388-5569
+                </div>
+                
+                <a href="https://wa.me/6281283885569?text=Hello%20Devis%2C%20I'm%20interested%20in%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20database%20project" 
+                   target="_blank" 
+                   class="btn btn-wa">
+                    <i class="fab fa-whatsapp"></i> Send WhatsApp Message
+                </a>
+                
+                <p style="margin-top: 20px; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
+                    Click the button above to connect with me directly on WhatsApp
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- MODAL FOR FULLSCREEN IMAGE -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <span class="modal-prev" onclick="changeImage(-1)">&#10094;</span>
+        <span class="modal-next" onclick="changeImage(1)">&#10095;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Devis Rabertra – Database Administrator. All rights reserved.</p>
+            <p style="margin-top: 8px; font-size: 0.9rem;">
+                <a href="https://wa.me/6281283885569" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Generate particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.width = Math.random() * 3 + 1 + 'px';
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Project data for modal
+        const projects = [
+            {
+                image: 'images/project1.jpg',
+                title: 'Database Monitoring Dashboard',
+                description: 'Real-time monitoring and performance tracking to ensure database stability and availability',
+                fallback: 'linear-gradient(145deg, #667eea, #764ba2)'
+            },
+            {
+                image: 'images/project2.jpg',
+                title: 'Automated Database Restore System',
+                description: 'Streamlining SQL Server database recovery with scheduled and dynamic restore processes',
+                fallback: 'linear-gradient(145deg, #764ba2, #667eea)'
+            },
+            {
+                image: 'images/project3.jpg',
+                title: 'Backup & Recovery',
+                description: 'Backup and recovery strategy implementation for disaster recovery plan',
+                fallback: 'linear-gradient(145deg, #667eea, #9f7aea)'
+            },
+            {
+                image: 'images/project4.jpg',
+                title: 'SQL Server Reporting',
+                description: 'Business report creation using SQL Server Reporting Services (SSRS)',
+                fallback: 'linear-gradient(145deg, #9f7aea, #667eea)'
+            },
+            {
+                image: 'images/project5.jpg',
+                title: 'EOD Optimization',
+                description: 'End of Day process optimization to improve processing efficiency',
+                fallback: 'linear-gradient(145deg, #667eea, #5a67d8)'
+            },
+            {
+                image: 'images/project6.jpg',
+                title: 'Database Security',
+                description: 'Database security implementation and user access management',
+                fallback: 'linear-gradient(145deg, #5a67d8, #667eea)'
+            }
+        ];
+
+        let currentIndex = 0;
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+
+        function openModal(index) {
+            currentIndex = index;
+            updateModalContent();
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = projects.length - 1;
+            } else if (currentIndex >= projects.length) {
+                currentIndex = 0;
+            }
+            updateModalContent();
+        }
+
+        function updateModalContent() {
+            const project = projects[currentIndex];
+            
+            const img = new Image();
+            img.onload = function() {
+                modalImg.src = project.image;
+                modalImg.style.background = 'none';
+                modalImg.style.padding = '0';
+            };
+            img.onerror = function() {
+                modalImg.src = '';
+                modalImg.style.background = project.fallback;
+                modalImg.style.padding = '100px';
+                modalImg.style.borderRadius = '20px';
+            };
+            img.src = project.image;
+            
+            modalCaption.innerHTML = `<strong>${project.title}</strong> - ${project.description}`;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            } else if (event.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis Rabertra - Database Administrator</title>
+    <!-- Font Awesome 5 (icons) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f6f9fc 0%, #eef2f6 100%);
+            color: #1e293b;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header / navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+
+        /* buttons */
+        .btn {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #3b82f6;
+            box-shadow: inset 0 0 0 2px #3b82f6;
+            margin-left: 12px;
+        }
+
+        .btn-outline:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* WhatsApp button */
+        .btn-wa {
+            background-color: #25D366;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px 32px;
+            font-size: 1.2rem;
+        }
+
+        .btn-wa:hover {
+            background-color: #128C7E;
+            box-shadow: 0 12px 28px rgba(18, 140, 126, 0.4);
+        }
+
+        .btn-wa i {
+            font-size: 1.5rem;
+        }
+
+        /* hero section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 40px 0 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1 1 400px;
+        }
+
+        .hero-content .badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: #1e40af;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(145deg, #3b82f6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #475569;
+            max-width: 500px;
+            margin-bottom: 32px;
+        }
+
+        .hero-image {
+            flex: 1 1 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            padding: 12px;
+            object-fit: cover;
+            box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .contact-info-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-info-item i {
+            color: #3b82f6;
+        }
+
+        .contact-info-item .fa-whatsapp {
+            color: #25D366;
+        }
+
+        /* section titles */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto 48px;
+        }
+
+        /* skill cards */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 24px 16px;
+            text-align: center;
+            border-radius: 28px;
+            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(59, 130, 246, 0.2);
+            border-color: #b3d0ff;
+        }
+
+        .skill-card i {
+            font-size: 40px;
+            color: #3b82f6;
+            margin-bottom: 12px;
+        }
+
+        .skill-card h3 {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #1e293b;
+        }
+
+        /* about section */
+        .about-section {
+            background: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-flex {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .about-left {
+            flex: 1 1 300px;
+        }
+
+        .about-right {
+            flex: 2 1 400px;
+        }
+
+        .about-left img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list i {
+            color: #3b82f6;
+            width: 20px;
+        }
+
+        .info-list .fa-whatsapp {
+            color: #25D366;
+        }
+
+        .education-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .education-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .education-item h3 {
+            color: #1e293b;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .education-item .meta {
+            color: #3b82f6;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        /* skills & competencies detail */
+        .skills-competencies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .skill-group {
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f1f5f9;
+        }
+
+        .skill-group h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #f8fafc;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        /* portfolio grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08);
+            transition: 0.25s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px -10px rgba(59, 130, 246, 0.25);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.3rem;
+            margin: 18px 20px 8px;
+            color: #1e293b;
+        }
+
+        .portfolio-item p {
+            color: #64748b;
+            margin: 0 20px 20px;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 8px;
+            margin: 0 20px 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* contact section - WhatsApp only */
+        .contact-wa {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .wa-icon-large {
+            font-size: 80px;
+            color: #25D366;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .wa-description {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .wa-number {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e293b;
+            display: inline-block;
+        }
+
+        .wa-number i {
+            color: #25D366;
+            margin-right: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-caption {
+            margin: 20px auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-prev, .modal-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .modal-prev:hover, .modal-next:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-prev { left: 20px; }
+        .modal-next { right: 20px; }
+
+        /* footer */
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            border-top: 1px solid #e9eef3;
+            margin-top: 60px;
+            color: #6b7a8f;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 12px;
+            }
+            .hero .btn {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .about-section {
+                padding: 30px;
+            }
+            .contact-info {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="logo">Devis Rabertra</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#portfolio">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">Database Administrator</span>
+                <h1>Hello, I'm <span>Devis Rabertra</span></h1>
+                <p>Experienced professional in managing and optimizing SQL Server databases. Proficient in SQL, T-SQL, and advanced SQL Server features.</p>
+                
+                <div class="contact-info">
+                    <a href="https://wa.me/6281283885569" target="_blank" class="contact-info-item">
+                        <i class="fab fa-whatsapp"></i> +62 812-8388-5569
+                    </a>
+                    <span class="contact-info-item"><i class="fas fa-envelope"></i> Devisrabertra10@gmail.com</span>
+                    <span class="contact-info-item"><i class="fas fa-map-marker-alt"></i> Bekasi, West Java</span>
+                    <a href="https://linkedin.com/in/devis-rabertra-64747b269" target="_blank" class="contact-info-item">
+                        <i class="fab fa-linkedin"></i> /in/devis-rabertra
+                    </a>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <a href="#contact" class="btn">Contact Me via WA</a>
+                    <a href="#about" class="btn btn-outline">About Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/profile.jpg" alt="Devis Rabertra" onerror="this.src='https://via.placeholder.com/400x400/3b82f6/ffffff?text=DR'">
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about-section">
+            <div class="about-flex">
+                <div class="about-left">
+                    <img src="images/profile.jpg" alt="Devis Rabertra" onerror="this.src='https://via.placeholder.com/300x400/3b82f6/ffffff?text=DR'">
+                    
+                    <ul class="info-list">
+                        <li><i class="fas fa-user"></i> Devis Rabertra</li>
+                        <li><i class="fas fa-calendar"></i> Age: 31</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bekasi, West Java</li>
+                        <li><a href="https://wa.me/6281283885569" target="_blank" style="display: flex; align-items: center; gap: 10px;"><i class="fab fa-whatsapp"></i> +62 812-8388-5569</a></li>
+                        <li><i class="fas fa-envelope"></i> Devisrabertra10@gmail.com</li>
+                        <li><a href="https://linkedin.com/in/devis-rabertra-64747b269" target="_blank" style="display: flex; align-items: center; gap: 10px;"><i class="fab fa-linkedin"></i> linkedin.com/in/devis-rabertra</a></li>
+                    </ul>
+                </div>
+                
+                <div class="about-right">
+                    <h2 style="font-size: 2rem; margin-bottom: 20px; color: #1e293b;">About Me</h2>
+                    <p style="color: #475569; margin-bottom: 20px;">
+                        Experienced professional in managing and optimizing SQL Server databases. Proficient in SQL, T-SQL, and advanced SQL Server features such as stored procedures, functions, triggers, and indexing. Possesses a deep understanding of SQL Server architecture, backup and restore processes, and performance tuning. Actively involved in the design, implementation, and maintenance of databases to support business operations.
+                    </p>
+                    <p style="color: #475569; margin-bottom: 30px;">
+                        Currently pursuing an S2 degree in Information Systems, further enhancing my expertise in database management and technology. Open to new opportunities in managing complex and large-scale database environments.
+                    </p>
+
+                    <h3 style="color: #1e293b; margin-bottom: 15px;">Education</h3>
+                    
+                    <div class="education-item">
+                        <h3>Master's in Information Systems</h3>
+                        <div class="meta">Nusa Mandiri University (Jakarta, 2024 - Present)</div>
+                        <p style="color: #64748b;">Currently in the 4th Semester</p>
+                    </div>
+                    
+                    <div class="education-item">
+                        <h3>Bachelor's in Information Systems</h3>
+                        <div class="meta">Nusa Mandiri University (Jakarta, 2021-2022)</div>
+                        <p style="color: #64748b;">GPA 3.34/4.00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILL CARDS (MAIN) -->
+        <section id="skills" style="scroll-margin-top: 30px;">
+            <h2 class="section-title">Core Skills</h2>
+            <p class="section-sub">Database technologies and tools I master to manage and optimize database systems.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fas fa-database"></i><h3>SQL Server</h3></div>
+                <div class="skill-card"><i class="fas fa-code"></i><h3>T-SQL</h3></div>
+                <div class="skill-card"><i class="fas fa-chart-bar"></i><h3>SSAS</h3></div>
+                <div class="skill-card"><i class="fas fa-exchange-alt"></i><h3>SSIS</h3></div>
+                <div class="skill-card"><i class="fas fa-file-alt"></i><h3>SSRS</h3></div>
+                <div class="skill-card"><i class="fas fa-warehouse"></i><h3>Data Warehouse</h3></div>
+                <div class="skill-card"><i class="fas fa-tachometer-alt"></i><h3>Performance Tuning</h3></div>
+                <div class="skill-card"><i class="fas fa-shield-alt"></i><h3>Database Security</h3></div>
+                <div class="skill-card"><i class="fas fa-copy"></i><h3>Backup & Recovery</h3></div>
+                <div class="skill-card"><i class="fas fa-project-diagram"></i><h3>Stored Procedures</h3></div>
+                <div class="skill-card"><i class="fas fa-bolt"></i><h3>Query Optimization</h3></div>
+                <div class="skill-card"><i class="fas fa-sitemap"></i><h3>Database Design</h3></div>
+            </div>
+        </section>
+
+        <!-- SKILLS & COMPETENCIES DETAIL -->
+        <section style="margin-top: 40px;">
+            <h2 class="section-title">Skills & Competencies Detail</h2>
+            <p class="section-sub">Technical expertise and soft skills in detail</p>
+            
+            <div class="skills-competencies">
+                <div class="skill-group">
+                    <h3>Database Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">SSAS</span>
+                        <span class="skill-tag">SSIS</span>
+                        <span class="skill-tag">SSRS</span>
+                        <span class="skill-tag">Data Warehouse</span>
+                        <span class="skill-tag">ETL</span>
+                        <span class="skill-tag">SQL Server Agent</span>
+                        <span class="skill-tag">T-SQL</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>Database Expertise</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">Performance Tuning</span>
+                        <span class="skill-tag">Query Optimization</span>
+                        <span class="skill-tag">Indexing</span>
+                        <span class="skill-tag">Stored Procedures</span>
+                        <span class="skill-tag">Functions</span>
+                        <span class="skill-tag">Triggers</span>
+                        <span class="skill-tag">Backup & Recovery</span>
+                        <span class="skill-tag">Data Analysis</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Teamwork</span>
+                        <span class="skill-tag">Flexibility</span>
+                        <span class="skill-tag">Problem-solving</span>
+                        <span class="skill-tag">Continuous Improvement</span>
+                        <span class="skill-tag">Quality Control</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO / PROJECT -->
+        <section id="portfolio" style="scroll-margin-top: 30px; margin-top: 60px;">
+            <h2 class="section-title">Database Projects</h2>
+            <p class="section-sub">Database projects I have worked on</p>
+            
+            <div class="portfolio-grid" id="portfolio-grid">
+                <div class="portfolio-item" onclick="openModal(0)">
+                    <div class="portfolio-img" style="background-image: url('images/project1.jpg');" onerror="this.style.background='linear-gradient(145deg, #3b82f6, #8b5cf6)'"></div>
+                    <h3>SQL Performance Tuning</h3>
+                    <p>Query and stored procedure optimization to improve database performance by 40%</p>
+                    <div class="portfolio-tags"><span class="tag">SQL Server</span><span class="tag">T-SQL</span><span class="tag">Performance</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(1)">
+                    <div class="portfolio-img" style="background-image: url('images/project2.jpg');" onerror="this.style.background='linear-gradient(145deg, #8b5cf6, #3b82f6)'"></div>
+                    <h3>Data Warehouse ETL</h3>
+                    <p>ETL implementation using SQL Server Integration Services (SSIS)</p>
+                    <div class="portfolio-tags"><span class="tag">SSIS</span><span class="tag">Data Warehouse</span><span class="tag">ETL</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(2)">
+                    <div class="portfolio-img" style="background-image: url('images/project3.jpg');" onerror="this.style.background='linear-gradient(145deg, #3b82f6, #a855f7)'"></div>
+                    <h3>Backup & Recovery</h3>
+                    <p>Backup and recovery strategy implementation for disaster recovery plan</p>
+                    <div class="portfolio-tags"><span class="tag">Backup</span><span class="tag">Recovery</span><span class="tag">DRP</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(3)">
+                    <div class="portfolio-img" style="background-image: url('images/project4.jpg');" onerror="this.style.background='linear-gradient(145deg, #a855f7, #3b82f6)'"></div>
+                    <h3>SQL Server Reporting</h3>
+                    <p>Business report creation using SQL Server Reporting Services (SSRS)</p>
+                    <div class="portfolio-tags"><span class="tag">SSRS</span><span class="tag">Reporting</span><span class="tag">Analysis</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(4)">
+                    <div class="portfolio-img" style="background-image: url('images/project5.jpg');" onerror="this.style.background='linear-gradient(145deg, #3b82f6, #6366f1)'"></div>
+                    <h3>EOD Optimization</h3>
+                    <p>End of Day process optimization to improve processing efficiency</p>
+                    <div class="portfolio-tags"><span class="tag">EOD</span><span class="tag">Optimization</span><span class="tag">Tuning</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(5)">
+                    <div class="portfolio-img" style="background-image: url('images/project6.jpg');" onerror="this.style.background='linear-gradient(145deg, #6366f1, #3b82f6)'"></div>
+                    <h3>Database Security</h3>
+                    <p>Database security implementation and user access management</p>
+                    <div class="portfolio-tags"><span class="tag">Security</span><span class="tag">Permissions</span><span class="tag">Audit</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT VIA WHATSAPP -->
+        <section id="contact" style="scroll-margin-top: 40px; margin-top: 60px;">
+            <h2 class="section-title">Contact Me via WhatsApp</h2>
+            <p class="section-sub">Interested in collaborating? Click the button below to chat with me directly</p>
+            
+            <div class="contact-wa">
+                <i class="fab fa-whatsapp wa-icon-large"></i>
+                <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: #1e293b;">Chat via WhatsApp</h3>
+                <p class="wa-description">Fast response, free consultation, and discussion about your database projects</p>
+                
+                <div class="wa-number">
+                    <i class="fab fa-whatsapp"></i> +62 812-8388-5569
+                </div>
+                
+                <a href="https://wa.me/6281283885569?text=Hello%20Devis%2C%20I'm%20interested%20in%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20database%20project" 
+                   target="_blank" 
+                   class="btn btn-wa">
+                    <i class="fab fa-whatsapp"></i> Send WhatsApp Message
+                </a>
+                
+                <p style="margin-top: 20px; color: #64748b; font-size: 0.9rem;">
+                    Click the button above to connect with me directly on WhatsApp
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- MODAL FOR FULLSCREEN IMAGE -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <span class="modal-prev" onclick="changeImage(-1)">&#10094;</span>
+        <span class="modal-next" onclick="changeImage(1)">&#10095;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Devis Rabertra – Database Administrator. All rights reserved.</p>
+            <p style="margin-top: 8px; font-size: 0.9rem;">
+                <a href="https://wa.me/6281283885569" target="_blank" style="color: #25D366;">
+                    <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Project data for modal
+        const projects = [
+            {
+                image: 'images/project1.jpg',
+                title: 'SQL Performance Tuning',
+                description: 'Query and stored procedure optimization to improve database performance by 40%',
+                fallback: 'linear-gradient(145deg, #3b82f6, #8b5cf6)'
+            },
+            {
+                image: 'images/project2.jpg',
+                title: 'Data Warehouse ETL',
+                description: 'ETL implementation using SQL Server Integration Services (SSIS)',
+                fallback: 'linear-gradient(145deg, #8b5cf6, #3b82f6)'
+            },
+            {
+                image: 'images/project3.jpg',
+                title: 'Backup & Recovery',
+                description: 'Backup and recovery strategy implementation for disaster recovery plan',
+                fallback: 'linear-gradient(145deg, #3b82f6, #a855f7)'
+            },
+            {
+                image: 'images/project4.jpg',
+                title: 'SQL Server Reporting',
+                description: 'Business report creation using SQL Server Reporting Services (SSRS)',
+                fallback: 'linear-gradient(145deg, #a855f7, #3b82f6)'
+            },
+            {
+                image: 'images/project5.jpg',
+                title: 'EOD Optimization',
+                description: 'End of Day process optimization to improve processing efficiency',
+                fallback: 'linear-gradient(145deg, #3b82f6, #6366f1)'
+            },
+            {
+                image: 'images/project6.jpg',
+                title: 'Database Security',
+                description: 'Database security implementation and user access management',
+                fallback: 'linear-gradient(145deg, #6366f1, #3b82f6)'
+            }
+        ];
+
+        let currentIndex = 0;
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+
+        function openModal(index) {
+            currentIndex = index;
+            updateModalContent();
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = projects.length - 1;
+            } else if (currentIndex >= projects.length) {
+                currentIndex = 0;
+            }
+            updateModalContent();
+        }
+
+        function updateModalContent() {
+            const project = projects[currentIndex];
+            
+            const img = new Image();
+            img.onload = function() {
+                modalImg.src = project.image;
+                modalImg.style.background = 'none';
+                modalImg.style.padding = '0';
+            };
+            img.onerror = function() {
+                modalImg.src = '';
+                modalImg.style.background = project.fallback;
+                modalImg.style.padding = '100px';
+                modalImg.style.borderRadius = '20px';
+            };
+            img.src = project.image;
+            
+            modalCaption.innerHTML = `<strong>${project.title}</strong> - ${project.description}`;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            } else if (event.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
