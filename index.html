@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devis Rabertra - Database Administrator</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <!-- Font Awesome 5 (icons) -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <!-- Google Fonts -->
@@ -1193,23 +1195,30 @@
                 
                 <div class="portfolio-item" onclick="openModal(3)">
                     <div class="portfolio-img" style="background-image: url('images/project4.jpg');" onerror="this.style.background='linear-gradient(145deg, #9f7aea, #667eea)'"></div>
-                    <h3>SQL Server Reporting</h3>
-                    <p>Business report creation using SQL Server Reporting Services (SSRS)</p>
-                    <div class="portfolio-tags"><span class="tag">SSRS</span><span class="tag">Reporting</span><span class="tag">Analysis</span></div>
+                    <h3>Performance Monitoring</h3>
+                    <p>Performance Monitoring</p>
+                    <div class="portfolio-tags"><span class="tag">Monitoring</span><span class="tag">Reporting</span><span class="tag">Analysis</span></div>
                 </div>
                 
                 <div class="portfolio-item" onclick="openModal(4)">
                     <div class="portfolio-img" style="background-image: url('images/project5.jpg');" onerror="this.style.background='linear-gradient(145deg, #667eea, #5a67d8)'"></div>
-                    <h3>EOD Optimization</h3>
-                    <p>End of Day process optimization to improve processing efficiency</p>
+                    <h3>Duration Distribution</h3>
+                    <p>Task Duration Statistics</p>
                     <div class="portfolio-tags"><span class="tag">EOD</span><span class="tag">Optimization</span><span class="tag">Tuning</span></div>
                 </div>
                 
                 <div class="portfolio-item" onclick="openModal(5)">
                     <div class="portfolio-img" style="background-image: url('images/project6.jpg');" onerror="this.style.background='linear-gradient(145deg, #5a67d8, #667eea)'"></div>
-                    <h3>Database Security</h3>
-                    <p>Database security implementation and user access management</p>
-                    <div class="portfolio-tags"><span class="tag">Security</span><span class="tag">Permissions</span><span class="tag">Audit</span></div>
+                    <h3>Datab Explorer</h3>
+                    <p>Data Explorer </p>
+                    <div class="portfolio-tags"><span class="tag">Data</span><span class="tag">Permissions</span><span class="tag">Audit</span></div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal(6)">
+                    <div class="portfolio-img" style="background-image: url('images/project7.jpg');" onerror="this.style.background='linear-gradient(145deg, #764ba2, #5a67d8)'"></div>
+                    <h3>Daily Trend</h3>
+                    <p>Report Daily Monitoring</p>
+                    <div class="portfolio-tags"><span class="tag">Migration</span><span class="tag">ETL</span><span class="tag">SSIS</span></div>
                 </div>
             </div>
         </section>
@@ -1281,7 +1290,7 @@
 
         createParticles();
 
-        // Project data for modal
+        // Project data for modal - updated with project 7
         const projects = [
             {
                 image: 'images/project1.jpg',
@@ -1318,6 +1327,12 @@
                 title: 'Database Security',
                 description: 'Database security implementation and user access management',
                 fallback: 'linear-gradient(145deg, #5a67d8, #667eea)'
+            },
+            {
+                image: 'images/project7.jpg',
+                title: 'Data Migration Project',
+                description: 'Large-scale data migration from legacy system to SQL Server with data validation',
+                fallback: 'linear-gradient(145deg, #764ba2, #5a67d8)'
             }
         ];
 
